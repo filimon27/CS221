@@ -406,8 +406,10 @@ public class BinarySearchTree<E extends Comparable<E>>
         if (node == null) {
             return;
         }
+
         inOrder( node.left);
-        System.out.print(node.data + ",");
+        if((Integer)node.data>50){
+        System.out.print(node.data + ",");}
         inOrder(node.right);
     }
 
@@ -445,13 +447,13 @@ public class BinarySearchTree<E extends Comparable<E>>
     }
 
 
-// count
+    // Counting Leaf Nodes
     public int countLeafNodes() {
 
         return countLeafNodes(root);
     }
 
-    public int countLeafNodes(Node n) {
+    private int countLeafNodes(Node n) {
         if(n==null) {
             return 0;
         }
@@ -459,6 +461,24 @@ public class BinarySearchTree<E extends Comparable<E>>
             return 1;
         }
         return countLeafNodes(n.left) + countLeafNodes(n.right);
+    }
+
+
+    public int counter(){
+        return counterGreaterThan(root);
+    }
+    private int counterGreaterThan(Node<E>node) {
+
+        if (node == null) {
+            return 0;
+        }else if ((Integer) node.data > 50) {
+            return 1 + counterGreaterThan(node.left) + counterGreaterThan(node.right);
+        }
+
+        else {
+            return 0 + counterGreaterThan(node.left) + counterGreaterThan(node.right);
+    }
+
     }
 
 
@@ -471,6 +491,8 @@ public class BinarySearchTree<E extends Comparable<E>>
     		bst.add(list.get(i));
     	 System.out.println(bst.getRoot());
     	 System.out.println("List of Items in a Sorted Order : " + bst.toList());
+
+
     	
       System.out.println("Deleted : "+bst.delete(36));
        System.out.println("Deleted : "+bst.delete(59));
@@ -487,6 +509,10 @@ public class BinarySearchTree<E extends Comparable<E>>
         System.out.println();
         System.out.println("Post Order Traversal Result : ");
        bst.postOrder();
+        System.out.println();
+        System.out.println( bst.counter());
+
+
 
        
     }
